@@ -1,5 +1,5 @@
-from openapi.pyctapi.auth import Auth
-from openapi.pyctapi.transport import Transport
+from src.auth import Auth
+from src.transport import Transport
 
 
 class CtapiBaseClient(object):

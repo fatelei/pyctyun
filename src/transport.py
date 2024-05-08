@@ -5,10 +5,7 @@ import urllib.request
 from urllib.parse import urlencode
 from urllib.error import HTTPError, URLError
 
-from openapi.metric.collector import metric
-from openapi.pyctapi import exceptions
-
-logger = logging.getLogger('')
+from src import exceptions
 
 
 class Transport(object):
@@ -41,26 +38,24 @@ class Transport(object):
             
         try:
             s = time.time()
-            logger.info(f"call ctapi {url} {method} {headers}")
             with urllib.request.urlopen(req, data=data, timeout=timeout) as response:
                 raw_data = response.read()
                 elapse = time.time() - s
-                logger.info(f"response from ctapi {url} {method} {response.status}")
-                metric.collect_ctapi_latency(path=api, method=method, elapse=elapse)
+                logging.info(f"response from ctapi {url} {method} {response.status}")
                 if 400 <= response.status < 500:
                     raise exceptions.ClientRequestError(status_code=response.status, reason=raw_data.decode('utf8'))
                 elif response.status >= 500:
                     raise exceptions.InternalServerError(status_code=response.status, reason=raw_data.decode('utf8'))
                 return json.loads(raw_data)
         except json.JSONDecodeError as e:
-            logger.warning(e, exc_info=True)
+            logging.warning(e, exc_info=True)
             raise exceptions.CtapiException(status_code=500, reason='unexcept json')
         except HTTPError as e:
-            logger.warning(e, exc_info=True)
+            logging.warning(e, exc_info=True)
             raise exceptions.CtapiException(status_code=e.code, reason=e.reason)
         except URLError as e:
-            logger.warning(e, exc_info=True)
+            logging.warning(e, exc_info=True)
             raise exceptions.CtapiException(status_code=500, reason=e.reason)
         except TimeoutError as e:
-            logger.warning(e, exc_info=True)
+            logging.warning(e, exc_info=True)
             raise exceptions.TimeoutError(status_code=504, reason='timeout')
