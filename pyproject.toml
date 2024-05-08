@@ -1,0 +1,15 @@
+[project]
+name = "pyctyun"
+version = "0.1.0"
+description = "ctapi python sdk"
+authors = [
+    {name = "fatelei", email = "fatelei@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
