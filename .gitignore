@@ -15,3 +15,8 @@
 # vendor/
 *.pyc
 __pycache__
+.coverage
+.idea
+__pypackages__
+coverage.xml
+.pdm.toml
