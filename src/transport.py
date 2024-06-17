@@ -1,6 +1,6 @@
 import requests
 
-from pyctapi import exceptions
+from src import exceptions
 
 
 class Transport(object):

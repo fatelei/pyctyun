@@ -2,7 +2,7 @@ from typing import List, Dict
 
 from dataclasses import dataclass
 
-from .base import CtapiBaseClient
+from src.apis.base import CtapiBaseClient
 
 
 @dataclass

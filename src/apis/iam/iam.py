@@ -3,8 +3,8 @@ import logging
 from dataclasses import dataclass
 from typing import Optional
 
-from openapi.pyctapi import exceptions
-from .base import CtapiBaseClient
+from src import exceptions
+from src.apis.base import CtapiBaseClient
 
 logger = logging.getLogger('')
 
