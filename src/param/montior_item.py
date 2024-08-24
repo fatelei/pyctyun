@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import Field
 
 from src.rules.rule import BaseParamModel
@@ -5,4 +7,6 @@ from src.rules.rule import BaseParamModel
 
 class MonitorItemParam(BaseParamModel):
 
-    device_type: str = Field(alias="deviceType", min_length=1)
+    region_id: str = Field(alias='regionID', min_length=1)
+    service: Optional[str] = Field(None)
+    item_type: Optional[str] = Field(None, alias='itemType')

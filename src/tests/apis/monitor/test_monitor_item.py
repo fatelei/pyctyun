@@ -16,6 +16,6 @@ class TestMonitorItemApi(unittest.TestCase):
                                     endpoint=os.getenv("endpoint"))
     
     def test_get_monitor_items(self):
-        param = MonitorItemParam(**{'deviceType': 'eip'})
+        param = MonitorItemParam(**{'regionID': 'bb9fdb42056f11eda1610242ac110002'})
         res = self.client.get_monitor_items(param)
         print(res)
