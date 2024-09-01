@@ -60,9 +60,9 @@ class BindOrUnbindVipParam(BaseParamModel):
     region_id: StrictStr = Field(alias='regionID', min_length=1)
     resource_type: StrictStr = Field(alias='resourceType', min_length=1)
     ha_vip_id: StrictStr = Field(alias='haVipID', min_length=1)
-    instance_id: Optional[StrictStr] = Field(alias='instanceID')
-    network_interface_id: Optional[StrictStr] = Field(alias='networkInterfaceID')
-    floating_id: Optional[StrictStr] = Field(alias='floatingID')
+    instance_id: Optional[StrictStr] = Field(None, alias='instanceID')
+    network_interface_id: Optional[StrictStr] = Field(None, alias='networkInterfaceID')
+    floating_id: Optional[StrictStr] = Field(None, alias='floatingID')
     project_id: StrictStr = Field('0', alias='projectID')
     
     @field_validator('resource_type', mode='after')
@@ -74,26 +74,26 @@ class BindOrUnbindVipParam(BaseParamModel):
     
     @field_validator('network_interface_id', mode='after')
     def check_network_interface_id(cls, v, values):
-        if 'resource_type' not in values:
+        if 'resource_type' not in values.data:
             return v
-        if values['resource_type'].lower() in ('vm', 'pm') and not v:
+        if values.data['resource_type'].lower() in ('vm', 'pm') and not v:
             raise ValueError("when resourceType is vm / pm, networkInterfaceID field required")
         return v
     
     @field_validator('instance_id', mode='after')
     def check_instance_id(cls, v, values):
-        if 'resource_type' not in values:
+        if 'resource_type' not in values.data:
             return v
         
-        if values['resource_type'].lower() in ('vm', 'pm') and not v:
+        if values.data['resource_type'].lower() in ('vm', 'pm') and not v:
             raise ValueError("when resourceType is vm / pm, instanceID field required")
         return v
     
     @field_validator('floating_id', mode='after')
     def check_floating_id(cls, v, values):
-        if 'resource_type' not in values:
+        if 'resource_type' not in values.data:
             return v
         
-        if values['resource_type'].lower() in ('network',) and not v:
+        if values.data['resource_type'].lower() in ('network',) and not v:
             raise ValueError("when resourceType is NETWORK, floating_id field required")
         return v
