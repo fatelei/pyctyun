@@ -32,7 +32,7 @@ class HavipApi(CtapiBaseClient):
         data = self.perform_request('/v4/vpc/havip/bind', params=params, method='POST')
         return BaseResponse(**data)
     
-    def unbindd_havip(self, param: havip.BindOrUnbindVipParam) -> BaseResponse:
+    def unbind_havip(self, param: havip.BindOrUnbindVipParam) -> BaseResponse:
         params = param.model_dump(by_alias=True)
         data = self.perform_request('/v4/vpc/havip/unbind', params=params, method='POST')
         return BaseResponse(**data)

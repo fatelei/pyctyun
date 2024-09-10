@@ -52,7 +52,7 @@ class ListVipParam(BaseParamModel):
     region_id: StrictStr = Field(alias='regionID', min_length=1)
     project_id: Optional[StrictStr] = Field('0', alias='projectID')
     client_token: StrictStr = Field(alias='clientToken', min_length=1, max_length=64)
-    filters: Optional[list[ListVipFilter]]
+    filters: Optional[list[ListVipFilter]] = Field(None)
 
 
 class BindOrUnbindVipParam(BaseParamModel):

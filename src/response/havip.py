@@ -44,8 +44,8 @@ class Havip(BaseModel):
     vpc_id: str = Field(alias="vpcID")
     subnet_id: str = Field(alias="subnetID")
     instance_info: List[InstanceInfo] = Field(alias="instanceInfo")
-    bind_ports: List[BindPorts] = Field(alias="bindPorts")
-    network_info: List[NetworkInfo] = Field(alias="networkInfo")
+    bind_ports: List[BindPorts] = Field([], alias="bindPorts")
+    network_info: List[NetworkInfo] = Field([], alias="networkInfo")
 
 
 class CreateHavipResponse(BaseResponse):
