@@ -510,3 +510,23 @@ def check_cycle_count(v, values, **kwargs):
                     'when cycleType is MONTH, cycleCount should be range  1 - 11')
         case _:
             return v
+
+
+def check_ipv4_map_ipv6_cidr(v):
+    if v.startswith("::ffff:") or v.startswith("0:0:0:0:0:ffff:"):
+        ipv6_network = ipaddress.IPv6Network(v)
+        ipv6_address = ipaddress.IPv6Address(ipv6_network.network_address.packed)
+        if ipv6_address.ipv4_mapped:
+            raise ValueError("ipv4 map 1pv6 is not allowed")
+    return v
+
+
+def check_ipv4_map_ipv6_addr(v):
+    try:
+        if v.startswith("::ffff:") or v.startswith("0:0:0:0:0:ffff:"):
+            ipv6 = ipaddress.IPv6Address(v)
+            if ipv6.ipv4_mapped:
+                raise ValueError("ipv4 map 1pv6 is not allowed")
+    except ipaddress.AddressValueError:
+        pass
+    return v
