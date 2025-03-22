@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from pydantic import Field, field_validator, StrictStr, conint, StrictInt
+from pydantic import Field, field_validator, StrictStr
 
 from src.rules.rule import check_description, BaseParamModel, check_ips, \
     check_name, PaginationGetParamModel, check_domain_name, check_ipv4_map_ipv6_addr
