@@ -1,6 +1,6 @@
 [project]
 name = "pyctyun"
-version = "0.1.0"
+version = "0.1.1"
 description = "ctapi python sdk"
 authors = [
     {name = "fatelei", email = "fatelei@gmail.com"},
@@ -72,3 +72,4 @@ target-version = "py310"
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
 [tool.pdm]
+distribution = true
