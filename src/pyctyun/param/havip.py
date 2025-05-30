@@ -84,9 +84,6 @@ class BindOrUnbindVipParam(BaseParamModel):
     def check_instance_id(cls, v, values):
         if 'resource_type' not in values.data:
             return v
-        
-        if values.data['resource_type'].lower() in ('vm', 'pm') and not v:
-            raise ValueError("when resourceType is vm / pm, instanceID field required")
         return v
     
     @field_validator('floating_id', mode='after')
