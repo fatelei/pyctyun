@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import Field, field_validator, StrictStr
+from pydantic import Field, field_validator, StrictStr, BaseModel, conint
 
 from pyctyun.rules.rule import PaginationGetParamModel, check_ip
 
@@ -35,3 +35,11 @@ class ListEipParam(PaginationGetParamModel):
         if value and value not in ['normal', 'cn2']:
             raise ValueError('should be normal or cn2')
         return value
+    
+    
+class ModifyEipSpecParam(BaseModel):
+    client_token: StrictStr = Field(alias='clientToken', min_length=1, max_length=64)
+    region_id: StrictStr = Field(alias='regionID', min_length=1)
+    eip_id: StrictStr = Field(alias='eipID', min_length=1)
+    project_id: StrictStr = Field('0', alias='projectID')
+    bandwidth: conint(strict=True, ge=1)

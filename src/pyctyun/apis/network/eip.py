@@ -15,3 +15,8 @@ class EipApi(CtapiBaseClient):
         params = param.model_dump(by_alias=True)
         data = self.perform_request('/v4/eip/new-list', params=params, method='POST')
         return NewListEipResponse(**data)
+
+    def modify_eip_spec(self, param: eip.ModifyEipSpecParam):
+        params = param.model_dump(by_alias=True)
+        data = self.perform_request("/v4/eip/modify-spec", params=params, method="POST")
+        return data
